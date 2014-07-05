@@ -1,0 +1,16 @@
+<div>
+    <div class="panel panel-primary" ng-show="result.show" ng-repeat="result in weather.results">
+
+        <div class="panel-heading">
+            <h3 class="panel-title">{{result.name}}</h3>
+        </div>
+        <div class="panel-body">
+            <div ng-repeat="weatherDetail in result.weatherDetails">
+                <h3>{{weatherDetail.name}}</h3>
+                <ul class="list-unstyled">
+                    <li ng-repeat="detail in weatherDetail.details"><strong>{{detail.name}}</strong>: {{detail.value}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

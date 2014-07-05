@@ -1,0 +1,33 @@
+!!!html
+html(ng-app="weatherApp")
+head
+    title Weather App
+    script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular.min.js")
+    script(src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js')
+
+    script(type="text/javascript" src="/scripts/weather.js")
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css")
+    link(rel="stylesheet" href="/stylesheets/weather.css")
+body
+ div.row.well
+    div.container
+        div.col-md-4.col-md-offset-1
+            form(role="form" name="addCityForm" ng-controller="AddCityController as addCityCtrl"
+                  ng-submit="addCityForm.$valid && addCityCtrl.addCity(addCityCtrl.listCities)")
+                div.input-group
+                    input.form-control( type="text" placeholder="Enter a City Name"
+                           ng-model="addCityCtrl.newCity.name" required)
+                    span.input-group-btn
+                        button.btn.btn-default(type="submit") Add
+
+
+
+                span.help-block Adding Weather for: {{addCityCtrl.newCity.name}}
+
+
+                ul.list-unstyled
+                   li(ng-repeat="city in addCityCtrl.listCities")
+                      |{{city.name}} <span ng-show="city.createdDate">(Added on {{city.createdDate | date}})</span>
+
+        div.col-md-6
+           weather-cards
