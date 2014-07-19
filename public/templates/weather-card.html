@@ -5,12 +5,30 @@
             <h3 class="panel-title">{{result.name}}</h3>
         </div>
         <div class="panel-body">
-            <div ng-repeat="weatherDetail in result.weatherDetails">
-                <h3>{{weatherDetail.name}}</h3>
-                <ul class="list-unstyled">
-                    <li ng-repeat="detail in weatherDetail.details"><strong>{{detail.name}}</strong>: {{detail.value}}</li>
+            <section class="tab" ng-controller="TabController as tab">
+                <ul class="nav nav-pills">
+                    <li ng-class="{active: tab.isSet(1)}">
+                        <a href ng-click='tab.setTab(1)'>Temperature</a>
+                    </li>
+                    <li ng-class="{active: tab.isSet(2)}">
+                        <a href ng-click='tab.setTab(2)'>Wind</a>
+                    </li>
+                    <li ng-class="{active: tab.isSet(3)}">
+                        <a href ng-click='tab.setTab(3)'>Humidity</a>
+                    </li>
+                    <li ng-class="{active: tab.isSet(4)}">
+                        <a href ng-click='tab.setTab(4)'>Sunrise & Sunset</a>
+                    </li>
                 </ul>
-            </div>
+                <div ng-repeat="weatherDetail in result.weatherDetails" ng-show='tab.isSet($index+1)'>
+
+                    <h3>{{weatherDetail.name}}</h3>
+                    <ul class="list-unstyled">
+                        <li ng-repeat="detail in weatherDetail.details"><strong>{{detail.name}}</strong>: {{detail.value}}</li>
+                    </ul>
+                </div>
+            </section>
+
         </div>
     </div>
 </div>
